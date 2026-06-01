@@ -16,10 +16,10 @@ USE master;
 GO
 
 -- Drop and recreate the 'DataWarehouseAnalytics' database
-IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouseAnalytics')
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouseAnalytics') --SELECT 1返回常量值
 BEGIN
-    ALTER DATABASE DataWarehouseAnalytics SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE DataWarehouseAnalytics;
+    ALTER DATABASE DataWarehouseAnalytics SET SINGLE_USER WITH ROLLBACK IMMEDIATE; --强制断开所有用户连接，并进行删除
+    DROP DATABASE DataWarehouseAnalytics; --一旦删除数据无法恢复
 END;
 GO
 
@@ -32,7 +32,7 @@ GO
 
 -- Create Schemas
 
-CREATE SCHEMA gold;
+CREATE SCHEMA gold; 
 GO
 
 CREATE TABLE gold.dim_customers(
@@ -77,10 +77,10 @@ CREATE TABLE gold.fact_sales(
 );
 GO
 
-TRUNCATE TABLE gold.dim_customers;
+TRUNCATE TABLE gold.dim_customers;  -- deletes all rows, keeps the table structure
 GO
 
-BULK INSERT gold.dim_customers
+BULK INSERT gold.dim_customers 
 FROM 'C:\sql\sql-data-analytics-project\datasets\csv-files\gold.dim_customers.csv'
 WITH (
 	FIRSTROW = 2,

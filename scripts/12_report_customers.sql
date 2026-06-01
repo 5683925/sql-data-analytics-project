@@ -28,11 +28,12 @@ IF OBJECT_ID('gold.report_customers', 'V') IS NOT NULL
     DROP VIEW gold.report_customers;
 GO
 
-CREATE VIEW gold.report_customers AS
+CREATE VIEW gold.report_customers AS--删除重建
 
 WITH base_query AS(
 /*---------------------------------------------------------------------------
-1) Base Query: Retrieves core columns from tables
+1) 基础数据关联查询
+关联销售事实表+客户维度表，清洗无效空订单数据，再提取数据
 ---------------------------------------------------------------------------*/
 SELECT
 f.order_number,
@@ -51,7 +52,8 @@ WHERE order_date IS NOT NULL)
 
 , customer_aggregation AS (
 /*---------------------------------------------------------------------------
-2) Customer Aggregations: Summarizes key metrics at the customer level
+2) 客户维度聚合统计
+按客户分组，汇总全周期消费行为核心指标
 ---------------------------------------------------------------------------*/
 SELECT 
 	customer_key,
@@ -71,6 +73,8 @@ GROUP BY
 	customer_name,
 	age
 )
+
+--最终指标计算+客户划分
 SELECT
 customer_key,
 customer_number,
@@ -95,7 +99,7 @@ total_sales,
 total_quantity,
 total_products
 lifespan,
--- Compuate average order value (AVO)
+-- Compute average order value (AVO)
 CASE WHEN total_sales = 0 THEN 0
 	 ELSE total_sales / total_orders
 END AS avg_order_value,

@@ -12,15 +12,16 @@ Table Used:
 ===============================================================================
 */
 
--- Retrieve a list of all tables in the database
-SELECT 
+-- 1.查询数据库中所有表，了解整体数据架构
+SELECT
     TABLE_CATALOG, 
     TABLE_SCHEMA, 
     TABLE_NAME, 
     TABLE_TYPE
 FROM INFORMATION_SCHEMA.TABLES;
 
--- Retrieve all columns for a specific table (dim_customers)
+-- 查看客户表格的字段元数据，用于后续用户分析建模
+-- 重点关注列名，数据类型，是否允许为空，字符长度
 SELECT 
     COLUMN_NAME, 
     DATA_TYPE, 
