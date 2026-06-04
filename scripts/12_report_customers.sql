@@ -21,6 +21,8 @@ Highlights:
 ===============================================================================
 */
 
+USE DataWarehouseAnalytics
+GO
 -- =============================================================================
 -- Create Report: gold.report_customers
 -- =============================================================================
@@ -28,7 +30,7 @@ IF OBJECT_ID('gold.report_customers', 'V') IS NOT NULL
     DROP VIEW gold.report_customers;
 GO
 
-CREATE VIEW gold.report_customers AS--删除重建
+CREATE VIEW gold.report_customers AS --不返回任何数据
 
 WITH base_query AS(
 /*---------------------------------------------------------------------------
@@ -97,9 +99,9 @@ DATEDIFF(month, last_order_date, GETDATE()) AS recency,
 total_orders,
 total_sales,
 total_quantity,
-total_products
+total_products,
 lifespan,
--- Compute average order value (AVO)
+-- Compute average order value (AOV),用户平均一次下单花费金额
 CASE WHEN total_sales = 0 THEN 0
 	 ELSE total_sales / total_orders
 END AS avg_order_value,
@@ -108,3 +110,17 @@ CASE WHEN lifespan = 0 THEN total_sales
      ELSE total_sales / lifespan
 END AS avg_monthly_spend
 FROM customer_aggregation
+
+
+GO
+-- ==========================================
+-- 分析查询：VIP/Regular/New 各客户段年龄结构分布
+-- ==========================================
+
+SELECT
+	customer_segment,
+	age_group,
+	COUNT(customer_key) AS total_customers
+FROM gold.report_customers
+GROUP BY customer_segment,age_group
+ORDER BY customer_segment,age_group;

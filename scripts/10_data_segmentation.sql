@@ -12,6 +12,8 @@ SQL Functions Used:
 ===============================================================================
 */
 
+USE DataWarehouseAnalytics
+GO
 /*Segment products into cost ranges and 
 count how many products fall into each segment*/
 WITH product_segments AS (

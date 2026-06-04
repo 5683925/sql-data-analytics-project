@@ -12,6 +12,8 @@ SQL Functions Used:
 ===============================================================================
 */
 
+USE DataWarehouseAnalytics
+GO
 -- Calculate the total sales per month 
 -- and the running total of sales over time 
 SELECT

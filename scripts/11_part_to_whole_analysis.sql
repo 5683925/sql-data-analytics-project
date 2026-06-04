@@ -12,6 +12,9 @@ SQL Functions Used:
     - Window Functions: SUM() OVER() for total calculations.
 ===============================================================================
 */
+
+USE DataWarehouseAnalytics
+GO
 -- Which categories contribute the most to overall sales?
 WITH category_sales AS (
     SELECT

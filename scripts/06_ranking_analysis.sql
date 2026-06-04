@@ -12,6 +12,10 @@ SQL Functions Used:
 ===============================================================================
 */
 
+
+USE DataWarehouseAnalytics
+GO
+
 -- Which 5 products Generating the Highest Revenue?
 -- Simple Ranking
 SELECT TOP 5

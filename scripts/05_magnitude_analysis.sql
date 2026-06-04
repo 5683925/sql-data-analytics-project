@@ -12,6 +12,10 @@ SQL Functions Used:
 ===============================================================================
 */
 
+USE DataWarehouseAnalytics
+GO
+
+
 -- Find total customers by countries
 SELECT
     country,

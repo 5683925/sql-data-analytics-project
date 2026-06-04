@@ -12,6 +12,9 @@ SQL Functions Used:
     - Aggregate Functions: SUM(), COUNT(), AVG()
 ===============================================================================
 */
+USE DataWarehouseAnalytics
+GO
+
 
 -- Analyse sales performance over time
 -- Quick Date Functions

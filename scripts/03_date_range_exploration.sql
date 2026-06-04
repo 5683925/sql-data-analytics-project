@@ -12,6 +12,10 @@ SQL Functions Used:
 */
 
 -- Determine the first and last order date and the total duration in months
+
+USE DataWarehouseAnalytics
+GO
+
 SELECT 
     MIN(order_date) AS first_order_date,
     MAX(order_date) AS last_order_date,

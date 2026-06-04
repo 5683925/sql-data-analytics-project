@@ -14,6 +14,8 @@ SQL Functions Used:
 ===============================================================================
 */
 
+USE DataWarehouseAnalytics
+GO
 /* Analyze the yearly performance of products by comparing their sales 
 to both the average sales performance of the product and the previous year's sales */
 WITH yearly_product_sales AS (
